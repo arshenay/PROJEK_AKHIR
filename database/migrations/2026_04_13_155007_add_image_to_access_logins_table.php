@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void {
     Schema::table('access_logins', function (Blueprint $table) {
-        $table->string('image')->nullable(); // Buat nyimpen nama file foto
+        $table->string('image')->nullable(); 
     });
 }
 

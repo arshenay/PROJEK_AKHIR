@@ -3,78 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RFID Security - Monitoring</title>
+    <title>☘️ Security Dashboard ☘️</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans p-0">
-   <nav class="bg-slate-800 border-b border-slate-700 p-4 mb-6">
-    <div class="container mx-auto flex justify-between items-center">
-        <div class="text-blue-400 font-bold text-xl uppercase tracking-wider">RFID-Secure v1.0</div>
-        <div class="flex gap-6">
-            <a href="/dashboard" class="text-slate-300 hover:text-blue-400 font-medium transition {{ request()->is('dashboard') ? 'text-blue-400 border-b-2 border-blue-400' : '' }}">
-                🖥️ Monitoring
-            </a>
-            <a href="/user-management" class="text-slate-300 hover:text-blue-400 font-medium transition {{ request()->is('user-management') ? 'text-blue-400 border-b-2 border-blue-400' : '' }}">
-                👥 Kelola User
-            </a>
-        </div>
-    </div>
-</nav>
-
-    <div class="container mx-auto px-4 py-10">
-        <header class="flex justify-between items-center mb-10">
-            <div>
-                <h1 class="text-3xl font-bold text-blue-400">Security Dashboard</h1>
-                <p class="text-slate-400 text-sm">Real-time monitoring sistem keamanan RFID</p>
+<body class="bg-[#9AD872] text-[#5A4545] p-8 font-sans"> 
+    <div class="max-w-6xl mx-auto"> 
+        
+        <nav class="bg-[#468432] border-2 border-[#4f8932] p-4 mb-10 rounded-2xl shadow-sm">
+            <div class="flex justify-between items-center px-4">
+                <div class="text-[#FFEF91] font-serif font-black text-2xl tracking-wide">
+                    RFID-SECURE <span class="text-[#CBB3B3] font-light text-sm">v1.0</span>
+                </div>
+                <div class="flex gap-8">
+                    <a href="/dashboard" class="flex items-center gap-2 font-serif font-bold text-[#FFEF91] border-b-2 border-[#FFA02E]">
+                        <span>🖥️</span> Monitoring
+                    </a>
+                    <a href="/user-management" class="flex items-center gap-2 font-serif font-medium text-[#FFEF91] hover:text-[#ffffff] transition">
+                        <span>👥</span> Kelola User
+                    </a>
+                </div>
             </div>
-            <div id="status-indicator" class="px-4 py-2 rounded-full bg-green-500/20 text-green-400 text-xs font-bold border border-green-500/50 animate-pulse">
-                SYSTEM ACTIVE
+        </nav>
+
+        <header class="flex justify-between items-center mb-10 px-2">
+            <div>
+                <h1 class="text-3xl font-serif font-black text-[#1F6F5F] tracking-wide">Security Dashboard </h1>
+                <p class="text-[#ffffff] text-sm mt-1 italic">Real-time monitoring sistem keamanan</p>
+            </div>
+            <div id="status-indicator" class="px-4 py-2 rounded-full bg-[#E2F4E9] text-[#7b6c16] text-xs font-bold border border-[#A3D9B7] animate-pulse">
+                ☘️ SYSTEM ACTIVE
             </div>
         </header>
 
-        <div class="bg-slate-800 rounded-xl shadow-2xl overflow-hidden border border-slate-700">
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden border-2 border-[#9AD872]">
             <table class="w-full text-left border-collapse">
-                <thead class="bg-slate-700/50">
+                <thead class="bg-[#468432] text-[#FFEF91] font-serif">
                     <tr>
-                        <th class="p-4 text-sm font-semibold text-slate-300">WAKTU</th>
-                        <th class="p-4 text-sm font-semibold text-slate-300">RFID UID</th>
-                        <th class="p-4 text-sm font-semibold text-slate-300">STATUS</th>
-                        <th class="p-4 text-sm font-semibold text-slate-300 text-center">VERIFIKASI WAJAH</th>
+                        <th class="p-4 text-sm font-bold">WAKTU</th>
+                        <th class="p-4 text-sm font-bold">RFID UID</th>
+                        <th class="p-4 text-sm font-bold">STATUS</th>
+                        <th class="p-4 text-sm font-bold text-center">VERIFIKASI WAJAH</th>
                     </tr>
                 </thead>
                 <tbody id="log-table-body">
-                    @foreach($logs as $log)
-                    <tr class="border-t border-slate-700 hover:bg-slate-700/30 transition-all">
-                        <td class="p-4 text-sm">{{ $log->created_at->format('H:i:s | d-m-Y') }}</td>
-                        <td class="p-4 font-mono text-blue-300">{{ $log->rfid_uid }}</td>
+                    @forelse($logs as $log)
+                    <tr class="border-t border-[#FFF0F0] hover:bg-[#FFF5F5] transition-all">
+                        <td class="p-4 text-sm text-[#7D6464]">{{ $log->created_at->format('H:i:s | d-m-Y') }}</td>
+                        <td class="p-4 font-mono text-[#A06A6A] font-bold">{{ $log->rfid_uid }}</td>
                         <td class="p-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $log->status == 'Success' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/50' : 'bg-rose-500/20 text-rose-400 border border-rose-500/50' }}">
-                                {{ strtoupper($log->status) }}
+                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $log->status == 'Success' ? 'bg-[#E2F4E9] text-[#FFEF91] border border-[#A3D9B7]' : 'bg-[#ff63637e] text-[#89791b] border border-[#EAAFAF]' }}">
+                                {{ $log->status == '✅ Success' ? ' SUCCESS' : '❌ DENIED' }}
                             </span>
                         </td>
                         <td class="p-4 flex justify-center">
                             @if($log->image)
-                                <img src="{{ asset('storage/'.$log->image) }}" class="w-20 h-20 object-cover rounded-lg border border-slate-600 shadow-lg">
+                                <img src="{{ asset('storage/pelaku/'.$log->image) }}" onclick="openImageModal('{{ asset('storage/pelaku/'.$log->image) }}')" class="w-20 h-20 object-cover rounded-2xl border-2 border-[#1c8b00] shadow-sm cursor-pointer hover:scale-110 transition-transform duration-300">
                             @else
-                                <div class="w-20 h-20 bg-slate-700 rounded-lg flex items-center justify-center text-xs text-slate-500 italic">No Foto</div>
+                                <div class="w-20 h-20 bg-[#FFF5F5] rounded-2xl flex items-center justify-center text-xs text-[#CBB3B3] italic border border-dashed ✅">No Foto 🤍</div>
                             @endif
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr id="empty-row">
+                        <td colspan="4" class="p-8 text-center text-[#CBB3B3] italic">Belum ada data scan masuk... ⏳</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div id="modal-camera" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
-        <div class="bg-slate-800 w-full max-w-md rounded-2xl p-6 border border-rose-500/50 shadow-[0_0_50px_-12px_rgba(244,63,94,0.5)]">
-            <h2 class="text-2xl font-bold text-rose-500 mb-2 text-center uppercase tracking-widest">Akses Ditolak!</h2>
-            <p class="text-slate-400 text-sm text-center mb-6">Harap menghadap kamera untuk verifikasi wajah</p>
+    <div id="image-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 cursor-pointer transition-opacity" onclick="closeImageModal()">
+        <div class="relative bg-[#FFF9F9] p-5 rounded-4-xl border-4 border-[#FFD1D1] shadow-2xl max-w-sm w-full cursor-default" onclick="event.stopPropagation()">
+            <button onclick="closeImageModal()" class="absolute -top-4 -right-4 bg-[#FCE8E8] text-[#A34343] w-12 h-12 rounded-full font-black text-2xl border-4 border-[#FFF9F9] shadow-lg hover:bg-[#F87171] hover:text-white transition-all transform hover:scale-110 flex items-center justify-center pb-1">×</button>
             
-            <div id="my_camera" class="rounded-xl overflow-hidden mx-auto shadow-2xl border-4 border-slate-700"></div>
-            
-            <div id="countdown" class="text-6xl font-black text-center mt-6 text-white drop-shadow-md"></div>
+            <img id="modal-image-src" src="" class="w-full h-auto rounded-2xl object-cover border-2 border-[#FFE1E1]">
+            <p class="text-center text-[#8C6262] font-serif font-bold mt-4 text-lg">📸 Tersangka Tertangkap Kamera</p>
         </div>
     </div>
 
@@ -82,60 +86,61 @@
     <script>
         let lastLogId = {{ $logs->first()->id ?? 0 }};
 
-        // Konfigurasi Kamera
-        Webcam.set({
-            width: 400,
-            height: 300,
-            image_format: 'jpeg',
-            jpeg_quality: 90
-        });
+        // Fungsi membuka modal gambar
+        function openImageModal(imgUrl) {
+            document.getElementById('modal-image-src').src = imgUrl;
+            document.getElementById('image-modal').classList.remove('hidden');
+        }
 
-        // Polling data baru
+        // Fungsi menutup modal gambar
+        function closeImageModal() {
+            document.getElementById('image-modal').classList.add('hidden');
+        }
+
+        function formatTanggal() {
+            const d = new Date();
+            const pad = (n) => n < 10 ? '0' + n : n;
+            return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())} | ${pad(d.getDate())}-${pad(d.getMonth()+1)}-${d.getFullYear()}`;
+        }
+
         setInterval(() => {
             $.get('/api/check-new-log', function(data) {
                 if (data && data.id > lastLogId) {
                     lastLogId = data.id;
-                    if (data.status === 'Denied') {
-                        triggerCamera(data.id);
-                    } else {
-                        location.reload(); 
+                    $('#empty-row').remove();
+
+                    const isSuccess = data.status === 'Success';
+                    const badgeClass = isSuccess 
+                        ? 'bg-[#E2F4E9] text-[#2E6B47] border border-[#A3D9B7]' 
+                        : 'bg-[#FCE8E8] text-[#A34343] border border-[#EAAFAF]';
+                    const textStatus = isSuccess ? '🌸 SUCCESS' : '🎀 DENIED';
+
+                    let fotoHtml = '<div class="w-20 h-20 bg-[#FFF5F5] rounded-2xl flex items-center justify-center text-xs text-[#CBB3B3] italic border border-dashed border-[#FFD1D1]">No Foto 🤍</div>';
+                    
+                    const newRow = `
+                        <tr class="border-t border-[#FFF0F0] bg-[#FFF0F0]/40 hover:bg-[#FFF5F5] transition-all id-log-${data.id}">
+                            <td class="p-4 text-sm text-[#7D6464]">${formatTanggal()}</td>
+                            <td class="p-4 font-mono text-[#A06A6A] font-bold">${data.rfid_uid}</td>
+                            <td class="p-4"><span class="px-3 py-1 rounded-full text-xs font-bold ${badgeClass}">${textStatus}</span></td>
+                            <td class="p-4 flex justify-center img-container">${fotoHtml}</td>
+                        </tr>
+                    `;
+
+                    $('#log-table-body').prepend(newRow);
+
+                    setTimeout(() => { $(`.id-log-${data.id}`).removeClass('bg-[#FFF0F0]/40'); }, 3000);
+                }
+
+                // Cek berkala apakah foto pelaku sudah terupload ke database
+                if (data && data.status === 'Denied' && data.image) {
+                    const cellFoto = $(`.id-log-${data.id} .img-container`);
+                    // Perbarui menjadi gambar yang BISA DIKLIK untuk membesarkan
+                    if (cellFoto.find('div').length > 0) {
+                        cellFoto.html(`<img src="/storage/pelaku/${data.image}" onclick="openImageModal('/storage/pelaku/${data.image}')" class="w-20 h-20 object-cover rounded-2xl border-2 border-[#FFD1D1] shadow-sm cursor-pointer hover:scale-110 transition-transform duration-300">`);
                     }
                 }
             });
-        }, 3000);
-
-        function triggerCamera(logId) {
-            const modal = document.getElementById('modal-camera');
-            modal.classList.remove('hidden'); // Show modal
-            Webcam.attach('#my_camera');
-
-            let timeLeft = 3;
-            const timerElement = document.getElementById('countdown');
-            
-            const timer = setInterval(() => {
-                timerElement.innerText = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    takePicture(logId);
-                }
-                timeLeft -= 1;
-            }, 1000);
-        }
-
-        function takePicture(logId) {
-            Webcam.snap(function(data_uri) {
-                fetch('/upload-webcam', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ id: logId, image: data_uri })
-                }).then(() => {
-                    location.reload();
-                });
-            });
-        }
+        }, 2000);
     </script>
 </body>
 </html>
